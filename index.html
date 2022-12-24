@@ -182,6 +182,63 @@
 					</footer>
 
 			</div>
+		<button id="new-post-button">New Post</button>
+<div id="blog-posts"></div>
+
+<!-- Add the JavaScript code to the end of the <body> element -->
+<script>
+  const blogPostsDiv = document.getElementById('blog-posts');
+  const newPostButton = document.getElementById('new-post-button');
+
+  newPostButton.addEventListener('click', () => {
+    // Prompt the user for the title and content of the new blog post
+    const title = prompt('Enter the title of the new blog post:');
+    const content = prompt('Enter the content of the new blog post:');
+
+    // Create a new blog post file with the given title
+    const filename = `${title.toLowerCase().replace(/\s/g, '-')}.html`;
+    const fileContent = `
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <title>${title}</title>
+        </head>
+        <body>
+          <h1>${title}</h1>
+          <p>${content}</p>
+        </body>
+      </html>
+    `;
+
+    // Save the new blog post file
+    // (Note: this is just a simulated saving process for the purpose of this example.
+    // In a real application, you would need to use a server-side language like PHP or Node.js
+    // to write the file to the server's file system.)
+    const saved = saveFile(filename, fileContent);
+    if (!saved) {
+      alert('Failed to save blog post');
+      return;
+    }
+
+    // Create a link to the new blog post
+    const blogPostLink = document.createElement('a');
+    blogPostLink.href = filename;
+    blogPostLink.innerText = title;
+
+    // Add the link to the homepage
+    blogPostsDiv.insertBefore(blogPostLink, blogPostsDiv.firstChild);
+  });
+
+  function saveFile(filename, fileContent) {
+    // This is a simulated saving process for the purpose of this example.
+    // In a real application, you would need to use a server-side language like PHP or Node.js
+    // to write the file to the server's file system.
+    console.log(`Saving ${filename}...`);
+    console.log(fileContent);
+    console.log('Saved!');
+    return true;
+  }
+</script>
 
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
